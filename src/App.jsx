@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Directory from './components/directory/Directory.component';
+import Home from './routes/home/home.component';
 
 const App = () => {
   const categories = [
@@ -30,9 +30,8 @@ const App = () => {
     },
   ];
 
-  return (
-    <Directory categories={categories} />
-  );
+  return <Home />;
+
 };
 
 export default App;
