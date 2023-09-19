@@ -5,6 +5,8 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
+import FormInput from "../form-input/form-input.component";
+
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -18,7 +20,7 @@ const SignUpForm = () => {
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,7 +39,6 @@ const SignUpForm = () => {
 
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
-
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("User already exists");
@@ -56,8 +57,8 @@ const SignUpForm = () => {
     <div>
       <h1>Sign up With Your Email</h1>
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label="Display Name"
           required
           type="text"
           name="displayName"
@@ -65,8 +66,8 @@ const SignUpForm = () => {
           onChange={handleChange}
         />
 
-        <label>Email</label>
-        <input
+        <FormInput
+          label="Email"
           required
           type="email"
           name="email"
@@ -74,8 +75,8 @@ const SignUpForm = () => {
           onChange={handleChange}
         />
 
-        <label>Password</label>
-        <input
+        <FormInput
+          label="Password"
           required
           type="password"
           name="password"
@@ -83,8 +84,8 @@ const SignUpForm = () => {
           onChange={handleChange}
         />
 
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label="Confirm Password"
           required
           type="password"
           name="confirmPassword"
