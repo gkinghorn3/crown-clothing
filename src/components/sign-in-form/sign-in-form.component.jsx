@@ -38,16 +38,18 @@ const SignInForm = () => {
       console.log(response);
 
       resetFormFields();
-    } catch (error) {
-      if (error.code === "auth/wrong-password") {
-        alert("Incorrect password");
-      } else if (error.code === "auth/user-not-found") {
-        alert("User not found");
-      } else {
-        console.log("Sign-in encountered an error", error);
-      }
+    } catch (Error) {
+        console.log(Error.message);
+    //   if (error.code === "auth/wrong-password") {
+    //     alert("Incorrect password");
+
+    //   } else if (error.code === "auth/user-not-found") {
+    //     alert("User not found, please create an account");
+    //   } else {
+    //     console.log("Sign-in encountered an error", error);
+    //   }
     }
-  };
+    };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
