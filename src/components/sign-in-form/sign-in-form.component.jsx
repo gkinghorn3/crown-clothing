@@ -1,11 +1,11 @@
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
-import {auth, signInWithGooglePopup, createUserDocumentFromAuth, signInwithGoogleRedirect } from '../../utils/firebase/firebase.utils'
+import {auth, signInWithGooglePopup, createUserDocumentFromAuth, signInwithGoogleRedirect, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils'
 
 
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+
 
 import "./sign-in-form.styles.scss";
 
@@ -33,13 +33,9 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      // extract the user object from the user credential object created by 'createUserWithEmailAndPassword()'
-      await signInWithEmailAndPassword(email, password);
-
-      const user = auth.currentUser;
-
-      await createUserDocumentFromAuth(user);
-      console.log("success");
+     
+      const response = await signInAuthUserWithEmailAndPassword(email, password)
+      console.log(response);
 
       resetFormFields();
     } catch (error) {
@@ -80,12 +76,14 @@ const SignInForm = () => {
           value={password}
           onChange={handleChange}
         />
-
+        <div className='btn-container'>
         <Button type="submit">Sign In</Button>
-        
+        <Button buttonType='google' clickFunc={signInWithGoogle} type="submit">Google Sign In</Button>
+        </div>
+
       </form>
-      <Button onClick={test} >test</Button>
-      <Button buttonType='google' onClick={signInWithGoogle} type="submit">Sign In With Google</Button>
+
+
     </div>
   );
 };

@@ -8,9 +8,9 @@ const buttonTypeClasses = {
 
 
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+const Button = ({clickFunc, children, buttonType, ...otherProps }) => {
   return (
-    <button className={`button-container ${buttonTypeClasses[buttonType]}`} >
+    <button className={`button-container ${buttonTypeClasses[buttonType]}`} onClick={clickFunc}>
       {children}
     </button>
   );
