@@ -9,7 +9,7 @@ import { default as logo } from "../../assets/crown.svg";
 const Navigation = () => {
 
   const { currentUser } = useContext(UserContext);
-  console.log(currentUser); 
+  // console.log(currentUser); 
 
   return (
     <Fragment>
