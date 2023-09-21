@@ -41,10 +41,10 @@ const SignInForm = () => {
       setCurrentUser(user);
 
       resetFormFields();
-      
+
     } catch (Error) {
         alert('Email or Password Incorrect');
-    
+        console.log(Error);
     }
     };
 
