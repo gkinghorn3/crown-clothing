@@ -1,10 +1,10 @@
+import { useState, useContext } from "react";
+import {auth, signInWithGooglePopup, createUserDocumentFromAuth, signInwithGoogleRedirect, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils'
+
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
-import {auth, signInWithGooglePopup, createUserDocumentFromAuth, signInwithGoogleRedirect, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils'
-
-
-import { useState } from "react";
+import {UserContext} from '../../contexts/user.context'  
 
 
 import "./sign-in-form.styles.scss";
@@ -18,6 +18,8 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const {setCurrentUser} = useContext(UserContext);
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -27,27 +29,22 @@ const SignInForm = () => {
     createUserDocumentFromAuth(user);
   };
 
-  const test = () => (console.log('test'))
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
      
-      const response = await signInAuthUserWithEmailAndPassword(email, password)
-      console.log(response);
+      const {user} = await signInAuthUserWithEmailAndPassword(email, password)
+      
+      setCurrentUser(user);
 
       resetFormFields();
+      
     } catch (Error) {
-        console.log(Error.message);
-    //   if (error.code === "auth/wrong-password") {
-    //     alert("Incorrect password");
-
-    //   } else if (error.code === "auth/user-not-found") {
-    //     alert("User not found, please create an account");
-    //   } else {
-    //     console.log("Sign-in encountered an error", error);
-    //   }
+        alert('Email or Password Incorrect');
+    
     }
     };
 

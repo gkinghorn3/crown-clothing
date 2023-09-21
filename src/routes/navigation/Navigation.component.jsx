@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./navigation.styles.scss";
 import { default as logo } from "../../assets/crown.svg";
